@@ -2,43 +2,20 @@
  "cells": [
   {
    "cell_type": "code",
-   "execution_count": 15,
+   "execution_count": 2,
    "metadata": {},
-   "outputs": [
-    {
-     "ename": "ImportError",
-     "evalue": "cannot import name 'update_train_log' from 'logger' (C:\\Users\\PAULOCESARCalabria\\Anaconda3\\envs\\PAULOCESARCalabriaEnv\\lib\\site-packages\\logger\\__init__.py)",
-     "output_type": "error",
-     "traceback": [
-      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
-      "\u001b[1;31mImportError\u001b[0m                               Traceback (most recent call last)",
-      "\u001b[1;32m<ipython-input-15-34e7ea3d4673>\u001b[0m in \u001b[0;36m<module>\u001b[1;34m\u001b[0m\n\u001b[0;32m      1\u001b[0m \u001b[1;31m#from logger import update_predict_log, update_train_log\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[1;32m----> 2\u001b[1;33m \u001b[1;32mfrom\u001b[0m \u001b[0mlogger\u001b[0m \u001b[1;32mimport\u001b[0m \u001b[0mupdate_train_log\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0m",
-      "\u001b[1;31mImportError\u001b[0m: cannot import name 'update_train_log' from 'logger' (C:\\Users\\PAULOCESARCalabria\\Anaconda3\\envs\\PAULOCESARCalabriaEnv\\lib\\site-packages\\logger\\__init__.py)"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
-    "#from logger import update_predict_log, update_train_log\n",
-    "from logger import update_train_log"
+    "from logger import update_train_log\n",
+    "from logger import update_predict_log"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": 3,
    "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Requirement already satisfied: logger in c:\\users\\paulocesarcalabria\\anaconda3\\envs\\paulocesarcalabriaenv\\lib\\site-packages (1.4)\n"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
-    "#!pip install joblib\n",
-    "#!pip install sklearn\n",
-    "!pip install logger\n",
     "import time,os,re,csv,sys,uuid,joblib\n",
     "from datetime import date\n",
     "from collections import defaultdict\n",
@@ -62,38 +39,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 23,
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "... loading ts data from files\n"
-     ]
-    }
-   ],
-   "source": [
-    "data_dir = os.path.join(\"cs-train\")\n",
-    "\n",
-    "ts_all = fetch_ts(data_dir,clean=False)"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 24,
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "X,y,dates = engineer_features(ts_all['all'])\n",
-    "        \n",
-    "## Perform a train-test split\n",
-    "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, shuffle=True, random_state=42)"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 4,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -388,7 +334,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 18,
+   "execution_count": 7,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -428,7 +374,8 @@
     "    pipe_rf = Pipeline(steps=[('scaler', StandardScaler()),\n",
     "                              ('rf', RandomForestRegressor())])\n",
     "    \n",
-    "    grid = GridSearchCV(pipe_rf, param_grid=param_grid_rf, cv=5, iid=False, n_jobs=-1)\n",
+    "#    grid = GridSearchCV(pipe_rf, param_grid=param_grid_rf, cv=5, iid=False, n_jobs=-1)\n",
+    "    grid = GridSearchCV(pipe_rf, param_grid=param_grid_rf, cv=5, n_jobs=-1)\n",
     "    grid.fit(X_train, y_train)\n",
     "    y_pred = grid.predict(X_test)\n",
     "    eval_rmse =  round(np.sqrt(mean_squared_error(y_test,y_pred)))\n",
@@ -458,7 +405,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 21,
+   "execution_count": 8,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -493,14 +440,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": 12,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -515,13 +455,14 @@
     "#        data_dir = os.path.join(\"..\",\"data\",\"cs-train\")\n",
     "        data_dir = os.path.join(\"cs-train\")\n",
     "    \n",
-    "    models = [f for f in os.listdir(os.path.join(\".\",\"models\")) if re.search(\"sl\",f)]\n",
-    "\n",
+    "#    models = [f for f in os.listdir(os.path.join(\".\",\"models\")) if re.search(\"sl\",f)]\n",
+    "    models = [f for f in os.listdir(os.path.join(\"models\")) if re.search(\"sl\",f)]\n",
     "    if len(models) == 0:\n",
     "        raise Exception(\"Models with prefix '{}' cannot be found did you train?\".format(prefix))\n",
     "\n",
     "    all_models = {}\n",
     "    for model in models:\n",
+    "#        all_models[re.split(\"-\",model)[1]] = joblib.load(os.path.join(\".\",\"models\",model))\n",
     "        all_models[re.split(\"-\",model)[1]] = joblib.load(os.path.join(\".\",\"models\",model))\n",
     "\n",
     "    ## load data\n",
@@ -537,7 +478,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 19,
+   "execution_count": 10,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -601,7 +542,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 22,
+   "execution_count": 14,
    "metadata": {},
    "outputs": [
     {
@@ -609,24 +550,24 @@
      "output_type": "stream",
      "text": [
       "TRAINING MODELS\n",
-      "... test flag on\n",
-      "...... subseting data\n",
-      "...... subseting countries\n",
-      "... loading ts data from files\n"
-     ]
-    },
-    {
-     "ename": "TypeError",
-     "evalue": "__init__() got an unexpected keyword argument 'iid'",
-     "output_type": "error",
-     "traceback": [
-      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
-      "\u001b[1;31mTypeError\u001b[0m                                 Traceback (most recent call last)",
-      "\u001b[1;32m<ipython-input-22-da7eb80377f4>\u001b[0m in \u001b[0;36m<module>\u001b[1;34m\u001b[0m\n\u001b[0;32m      9\u001b[0m \u001b[1;31m#    data_dir = os.path.join(\"..\",\"data\",\"cs-train\")\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m     10\u001b[0m     \u001b[0mdata_dir\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0mos\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mpath\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mjoin\u001b[0m\u001b[1;33m(\u001b[0m\u001b[1;34m\"cs-train\"\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[1;32m---> 11\u001b[1;33m     \u001b[0mmodel_train\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0mdata_dir\u001b[0m\u001b[1;33m,\u001b[0m\u001b[0mtest\u001b[0m\u001b[1;33m=\u001b[0m\u001b[1;32mTrue\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0m\u001b[0;32m     12\u001b[0m \u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m     13\u001b[0m     \u001b[1;31m## load the model\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n",
-      "\u001b[1;32m<ipython-input-21-f68f1e0f9812>\u001b[0m in \u001b[0;36mmodel_train\u001b[1;34m(data_dir, test)\u001b[0m\n\u001b[0;32m     23\u001b[0m             \u001b[1;32mcontinue\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m     24\u001b[0m \u001b[1;33m\u001b[0m\u001b[0m\n\u001b[1;32m---> 25\u001b[1;33m         \u001b[0m_model_train\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0mdf\u001b[0m\u001b[1;33m,\u001b[0m\u001b[0mcountry\u001b[0m\u001b[1;33m,\u001b[0m\u001b[0mtest\u001b[0m\u001b[1;33m=\u001b[0m\u001b[0mtest\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0m\u001b[0;32m     26\u001b[0m \u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m     27\u001b[0m     \u001b[1;32mreturn\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n",
-      "\u001b[1;32m<ipython-input-18-29cf31856b8d>\u001b[0m in \u001b[0;36m_model_train\u001b[1;34m(df, tag, test)\u001b[0m\n\u001b[0;32m     35\u001b[0m                               ('rf', RandomForestRegressor())])\n\u001b[0;32m     36\u001b[0m \u001b[1;33m\u001b[0m\u001b[0m\n\u001b[1;32m---> 37\u001b[1;33m     \u001b[0mgrid\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0mGridSearchCV\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0mpipe_rf\u001b[0m\u001b[1;33m,\u001b[0m \u001b[0mparam_grid\u001b[0m\u001b[1;33m=\u001b[0m\u001b[0mparam_grid_rf\u001b[0m\u001b[1;33m,\u001b[0m \u001b[0mcv\u001b[0m\u001b[1;33m=\u001b[0m\u001b[1;36m5\u001b[0m\u001b[1;33m,\u001b[0m \u001b[0miid\u001b[0m\u001b[1;33m=\u001b[0m\u001b[1;32mFalse\u001b[0m\u001b[1;33m,\u001b[0m \u001b[0mn_jobs\u001b[0m\u001b[1;33m=\u001b[0m\u001b[1;33m-\u001b[0m\u001b[1;36m1\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0m\u001b[0;32m     38\u001b[0m     \u001b[0mgrid\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mfit\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0mX_train\u001b[0m\u001b[1;33m,\u001b[0m \u001b[0my_train\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m     39\u001b[0m     \u001b[0my_pred\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0mgrid\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mpredict\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0mX_test\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n",
-      "\u001b[1;32m~\\Anaconda3\\envs\\PAULOCESARCalabriaEnv\\lib\\site-packages\\sklearn\\utils\\validation.py\u001b[0m in \u001b[0;36minner_f\u001b[1;34m(*args, **kwargs)\u001b[0m\n\u001b[0;32m     61\u001b[0m             \u001b[0mextra_args\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0mlen\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0margs\u001b[0m\u001b[1;33m)\u001b[0m \u001b[1;33m-\u001b[0m \u001b[0mlen\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0mall_args\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m     62\u001b[0m             \u001b[1;32mif\u001b[0m \u001b[0mextra_args\u001b[0m \u001b[1;33m<=\u001b[0m \u001b[1;36m0\u001b[0m\u001b[1;33m:\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[1;32m---> 63\u001b[1;33m                 \u001b[1;32mreturn\u001b[0m \u001b[0mf\u001b[0m\u001b[1;33m(\u001b[0m\u001b[1;33m*\u001b[0m\u001b[0margs\u001b[0m\u001b[1;33m,\u001b[0m \u001b[1;33m**\u001b[0m\u001b[0mkwargs\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0m\u001b[0;32m     64\u001b[0m \u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m     65\u001b[0m             \u001b[1;31m# extra_args > 0\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n",
-      "\u001b[1;31mTypeError\u001b[0m: __init__() got an unexpected keyword argument 'iid'"
+      "... loading ts data from files\n",
+      "... saving model: models\\sl-all-0_1.joblib\n",
+      "... saving model: models\\sl-eire-0_1.joblib\n",
+      "... saving model: models\\sl-france-0_1.joblib\n",
+      "... saving model: models\\sl-germany-0_1.joblib\n",
+      "... saving model: models\\sl-hong_kong-0_1.joblib\n",
+      "... saving model: models\\sl-netherlands-0_1.joblib\n",
+      "... saving model: models\\sl-norway-0_1.joblib\n",
+      "... saving model: models\\sl-portugal-0_1.joblib\n",
+      "... saving model: models\\sl-singapore-0_1.joblib\n",
+      "... saving model: models\\sl-spain-0_1.joblib\n",
+      "... saving model: models\\sl-united_kingdom-0_1.joblib\n",
+      "LOADING MODELS\n",
+      "... loading ts data from files\n",
+      "... models loaded:  all,eire,france,germany,hong_kong,netherlands,norway,portugal,singapore,spain,united_kingdom\n",
+      "... loading ts data from files\n",
+      "2018-01-05\n",
+      "{'y_pred': array([183853.752]), 'y_proba': None}\n"
      ]
     }
    ],
@@ -641,7 +582,9 @@
     "    print(\"TRAINING MODELS\")\n",
     "#    data_dir = os.path.join(\"..\",\"data\",\"cs-train\")\n",
     "    data_dir = os.path.join(\"cs-train\")\n",
-    "    model_train(data_dir,test=True)\n",
+    "#    model_train(data_dir,test=True)\n",
+    "    model_train(data_dir,test=False)\n",
+    "\n",
     "\n",
     "    ## load the model\n",
     "    print(\"LOADING MODELS\")\n",
