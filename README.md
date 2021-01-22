@@ -1,4 +1,17 @@
+### Evaluation Criteria:
 
+1. Are there unit tests for the API?
+2. Are there unit tests for the model?
+3. Are there unit tests for the logging?
+> (A) For the 3 above see /unittests/ApiTests.py, /unittests/ModelTests.py, /unittests/LoggerTests.py
+
+Note that this step is carried out **before you read in the data**.  It helps clarify exactly what your are looking for in the data and it helps provide context for what the feature matrix and targets will look like.
+
+3. Create a python script to extract relevant data from multiple data sources, automating the process of data ingestion.
+
+From within a Python module there should be a function that reads in the data, attempts to catch common input errors and returns a feature matrix (NumPy array or Pandas DataFrame) that will subsequently be used as a starting point for EDA and modeling.
+
+4. Investigate the relationship between the relevant data, the target and the business metric.
 
 # Below is the information provided for the Case Study (Parts 1-3)
 # IBM AI Enterprise Workflow Capstone
