@@ -1,3 +1,6 @@
+
+
+# Below is the information provided for the Case Study (Parts 1-3)
 # IBM AI Enterprise Workflow Capstone
 Files for the IBM AI Enterprise Workflow Capstone project. 
 
