@@ -4,6 +4,8 @@
 2. Are there unit tests for the model?
 3. Are there unit tests for the logging?
 > (A) For the 3 above see /unittests/ApiTests.py, /unittests/ModelTests.py, /unittests/LoggerTests.py
+4. Can all of the unit tests be run with a single script and do all of the unit tests pass?
+> (A)  /run-tests.py
 
 Note that this step is carried out **before you read in the data**.  It helps clarify exactly what your are looking for in the data and it helps provide context for what the feature matrix and targets will look like.
 
