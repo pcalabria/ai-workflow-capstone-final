@@ -15,10 +15,13 @@
 8. Does the data ingestion exists as a function or script to facilitate automation?
 > (A) Yes, see /solution-guidance/cslib.py
 9. Where multiple models compared?
-> (A) Yes, see Jupyter nootebook on: /notebooks/Models performance comparison.ipynb
-From within a Python module there should be a function that reads in the data, attempts to catch common input errors and returns a feature matrix (NumPy array or Pandas DataFrame) that will subsequently be used as a starting point for EDA and modeling.
-
-4. Investigate the relationship between the relevant data, the target and the business metric.
+> (A) Yes, see Jupyter nootebook on: /Notebooks/Models performance comparison.ipynb
+10. Did the EDA investigation use visualizations?
+> (A) Yes, see  /Part 1 Presentation/AI Workflow Capstone Project Paulo Calabria 20210119.pdf and /Notebooks/case-study-part1.ipynb
+11. Is everything containerized within a working Docker image?
+> (A) /Dockerfile
+12. Did they use a visualization to compare their model to the baseline model?
+> (A) Please see /Notebooks/*
 
 # Below is the information provided for the Case Study (Parts 1-3)
 # IBM AI Enterprise Workflow Capstone
