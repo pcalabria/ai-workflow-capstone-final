@@ -1,4 +1,4 @@
-### Evaluation Criteria:
+# Evaluation Criteria:
 
 1. Are there unit tests for the API?
 2. Are there unit tests for the model?
@@ -23,7 +23,7 @@
 12. Did they use a visualization to compare their model to the baseline model?
 > (A) Please see /Notebooks/*
 
-# Below is the information provided for the Case Study (Parts 1-3)
+## Below is the information provided for the Case Study (Parts 1-3)
 # IBM AI Enterprise Workflow Capstone
 Files for the IBM AI Enterprise Workflow Capstone project. 
 
