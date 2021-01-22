@@ -6,11 +6,16 @@
 > (A) For the 3 above see /unittests/ApiTests.py, /unittests/ModelTests.py, /unittests/LoggerTests.py
 4. Can all of the unit tests be run with a single script and do all of the unit tests pass?
 > (A)  /run-tests.py
-
-Note that this step is carried out **before you read in the data**.  It helps clarify exactly what your are looking for in the data and it helps provide context for what the feature matrix and targets will look like.
-
-3. Create a python script to extract relevant data from multiple data sources, automating the process of data ingestion.
-
+5. Is there a mechanism to monitor performance?
+> (A) /model/logger.py
+6. Was there an attempt to isolate the read/write unit tests From production models and logs? 
+> (A) Yes. Production models and logs use prefix = sl; no prefix used for test. See /unittests/* /model/*
+7. Does the API work as expected? For example, can you get predictions for a specific country as well as for all countries combined?
+> (A) Yes, see /app.py
+8. Does the data ingestion exists as a function or script to facilitate automation?
+> (A) Yes, see /solution-guidance/cslib.py
+9. Where multiple models compared?
+> (A) Yes, see Jupyter nootebook on: /notebooks/Models performance comparison.ipynb
 From within a Python module there should be a function that reads in the data, attempts to catch common input errors and returns a feature matrix (NumPy array or Pandas DataFrame) that will subsequently be used as a starting point for EDA and modeling.
 
 4. Investigate the relationship between the relevant data, the target and the business metric.
