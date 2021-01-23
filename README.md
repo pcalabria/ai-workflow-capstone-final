@@ -1,3 +1,14 @@
+# AI Workflow Capstone Project
+This project is to create a service that, at any point in time, will predict the revenue for the following month
+## Deployment notes
+All commands are from this directory.
+### Flask app (app.py) testing
+> ~$ python app.py
+
+or to start the flask app in debug mode
+
+> ~$ python app.py -d
+
 # Evaluation Criteria:
 
 1. Are there unit tests for the API?
