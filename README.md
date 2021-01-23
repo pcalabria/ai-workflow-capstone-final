@@ -14,7 +14,7 @@ or to start the flask app in debug mode
 > ~$ docker build -t ai-workflow-app
 
 Check that the image is there.
-> ~$ python app.py -d
+> ~$ docker image ls
 
 You may notice images that you no longer use. You may delete them with
 > ~$ docker image rm IMAGE_ID_OR_NAME
