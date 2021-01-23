@@ -11,10 +11,39 @@ or to start the flask app in debug mode
 
 ### Build the Docker image and run it
 
-> ~$ docker build -t ai-workflow-ml-app
+> ~$ docker build -t ai-workflow-app
 
 Check that the image is there.
 > ~$ python app.py -d
+
+You may notice images that you no longer use. You may delete them with
+> ~$ docker image rm IMAGE_ID_OR_NAME
+
+Run the container
+> ~$ docker run -p 4000:8080 ai-workflow-app
+
+## Run the unittests
+
+Before running the unit tests launch the app.py.
+
+To run only the api tests
+
+> ~$ python unittests/ApiTests.py
+
+To run only the model tests
+
+> ~$ python unittests/ModelTests.py
+
+To run all of the tests
+
+> ~$ python run-tests.py
+
+## Run the container to test that it is working
+
+> ~$ docker run -p 4000:8080 ai-workflow-app
+
+Go to http://0.0.0.0:4000/ and you will see a basic website that can be customtized for a project.
+
 # Evaluation Criteria:
 
 1. Are there unit tests for the API?
