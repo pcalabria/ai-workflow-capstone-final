@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-log tests
+logging tests
 """
 
 import os, sys
