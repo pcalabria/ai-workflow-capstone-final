@@ -36,7 +36,7 @@ To run only the model tests
 
 > ~$ python unittests/ModelTests.py
 
-To run only the log tests
+To run only the logging tests
 
 > ~$ python unittests/LoggerTests.py
 
