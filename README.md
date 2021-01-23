@@ -12,6 +12,7 @@ or to start the flask app in debug mode
 ### Build the Docker image and run it
 
 > ~$ docker build -t ai-workflow-ml-app
+
 Check that the image is there.
 > ~$ python app.py -d
 # Evaluation Criteria:
